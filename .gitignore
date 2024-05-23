@@ -5,3 +5,5 @@
 **/*.crt
 **/*.pem
 **/*.srl
+
+easyrsa/pki/
