@@ -18,8 +18,8 @@ services:
         source: ./openssl
         target: /etc/openvpn/openssl
       - type: bind
-        source: ./server/openvpn.conf
-        target: /etc/openvpn/server/openvpn.conf
+        source: ./server/
+        target: /etc/openvpn/server/
       - type: bind
         source: /dev/net/tun
         target: /dev/net/tun
