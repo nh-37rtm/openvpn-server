@@ -1,0 +1,18 @@
+version: '3.6'
+
+services:
+  openvpn-server:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - type: bind
+        source: ./client-configs
+        target: /etc/openvpn/server/client-configs
+      - type: bind
+        source: /dev/net/tun
+        target: /dev/net/tun
+

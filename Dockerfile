@@ -11,7 +11,7 @@ USER root:root
 # python execution environment
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
-    openvpn openssl
+    openvpn openssl jq
 
 COPY ./server/ /etc/openvpn/server/
 COPY ./openssl /etc/openvpn/server/openssl/
