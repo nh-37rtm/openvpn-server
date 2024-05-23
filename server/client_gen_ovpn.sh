@@ -1,6 +1,7 @@
 # /bin/bash
 
 set -euxab
+type jq ip
 
 {
 

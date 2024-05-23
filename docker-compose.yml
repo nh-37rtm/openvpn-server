@@ -14,7 +14,7 @@ services:
         target: /etc/openvpn/server/client-configs
       - type: bind
         source: ./openssl
-        target: /etc/openvpn/server/openssl
+        target: /etc/openvpn/openssl
       - type: bind
         source: /dev/net/tun
         target: /dev/net/tun
