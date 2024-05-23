@@ -1,0 +1,7 @@
+
+# openssl private data
+**/*.csr
+**/*.key
+**/*.crt
+**/*.pem
+**/*.srl
