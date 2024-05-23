@@ -18,12 +18,6 @@ RUN mkdir -p \
 RUN ln -s /etc/openvpn/openssl /etc/openvpn/server/openssl
 WORKDIR /etc/openvpn/server
 
-COPY easyrsa/pki/private/ascs-npt.key /etc/openvpn/server/openssl/server-key.pem
-COPY easyrsa/pki/issued/ascs-npt.crt /etc/openvpn/server/openssl/server-cert.pem
-COPY easyrsa/pki/private/ca.key /etc/openvpn/server/openssl/ca-key.pem
-COPY easyrsa/pki/ca.crt /etc/openvpn/server/openssl/ca-cert.pem
-COPY easyrsa/pki/dh.pem /etc/openvpn/server/openssl/dh.pem
-
 # Create a dedicated user
 # RUN useradd -ms /bin/bash openvpn
 # RUN openvpn --genkey secret /etc/openvpn/server/openssl/ta.key
