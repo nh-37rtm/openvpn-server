@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile
       context: .
     network_mode: host
-    entrypoint: /bin/bash
+    # debug
+    # entrypoint: /bin/bash
     cap_add:
       - NET_ADMIN
     volumes:
