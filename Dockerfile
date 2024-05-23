@@ -13,14 +13,13 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
     openvpn openssl jq iproute2
 
-COPY ./server/ /etc/openvpn/server/
-COPY ./openssl /etc/openvpn/server/openssl/
-
 # Create a dedicated user
 # RUN useradd -ms /bin/bash openvpn
 
 RUN mkdir -p \
     /etc/openvpn/server/client-configs /var/openvpn/
+
+RUN ln -s /etc/openvpn/openssl /etc/openvpn/server/openssl
 
 WORKDIR /etc/openvpn/server
 # RUN openvpn --genkey secret ta.key
