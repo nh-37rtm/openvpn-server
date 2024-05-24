@@ -18,6 +18,28 @@ services:
         source: ./openssl
         target: /etc/openvpn/openssl
       - type: bind
+        source: ./server/
+        target: /etc/openvpn/server/
+      - type: bind
+        source: /dev/net/tun
+        target: /dev/net/tun
+  open-ssl:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    network_mode: host
+    # debug
+    # entrypoint: /bin/bash
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - type: bind
+        source: ./client-configs
+        target: /etc/openvpn/server/client-configs
+      - type: bind
+        source: ./openssl
+        target: /etc/openvpn/openssl
+      - type: bind
         source: ./scripts
         target: /etc/openvpn/scripts
       - type: bind
@@ -26,4 +48,3 @@ services:
       - type: bind
         source: /dev/net/tun
         target: /dev/net/tun
-
