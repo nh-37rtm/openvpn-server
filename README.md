@@ -1,4 +1,17 @@
 
-docker run -it -v /dev/net/tun:/dev/net/tun --network host --cap-add NET_ADMIN openvpn
+# openvpn helper server and scripts
 
-openvpn --cd /etc/openvpn/server/ --config /etc/openvpn/server/openvpn.conf
+
+## generate a new server certificate 
+bash ./scripts/build_server.sh
+
+## generate a new server certificate (overwrite old certificate !)
+bash ./scripts/build_client.sh
+
+## build/start the server
+docker-compose up
+
+## acess openvpn management interface 
+
+user# apt install netcat-openbsd
+user# nc -U ./server/management.sock

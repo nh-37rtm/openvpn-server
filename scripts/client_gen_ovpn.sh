@@ -1,11 +1,24 @@
 # /bin/bash
 
 set -euxab
-type jq ip
+
+
+cd $(dirname -- "$0")/../openssl
+
+prerequisites()
+{
+    type test cat jq ip
+    for pr in ca-cert.pem client-cert.pem client-key.pem ta.key
+    do
+        test -e  "$pr"
+    done
+    
+}
+
+prerequisites >/dev/null
 
 {
 
-    cd $(dirname -- "$0")/..
     FIRST_IPV6=$(ip --json address | jq '.[] | select(.ifname | test("enp0s")) | .addr_info[1] | select( .family == "inet6" ) | .local')
     cat <<EOF
 client
@@ -43,20 +56,20 @@ mute-replay-warnings
 
 # Certificate Authority cert
 <ca>
-$(cat openssl/ca-cert.pem)
+$(cat ca-cert.pem)
 </ca>
 # Client cert
 <cert>
-$(cat openssl/client-cert.pem)
+$(cat client-cert.pem)
 </cert>
 # Client private key 
 <key>
-$(cat openssl/client-key.pem)
+$(cat client-key.pem)
 </key>
 
 # PSK and direction of TLS channel authentication
 <tls-auth>
-$(cat openssl/ta.key)
+$(cat ta.key)
 </tls-auth>
 key-direction 1
 
