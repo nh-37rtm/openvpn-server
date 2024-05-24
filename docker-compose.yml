@@ -18,6 +18,9 @@ services:
         source: ./openssl
         target: /etc/openvpn/openssl
       - type: bind
+        source: ./scripts
+        target: /etc/openvpn/scripts
+      - type: bind
         source: ./server/
         target: /etc/openvpn/server/
       - type: bind
