@@ -4,6 +4,7 @@ services:
   openvpn-server:
     build: 
       dockerfile: Dockerfile
+      target: openvpn
       context: .
     network_mode: host
     # debug
@@ -26,6 +27,7 @@ services:
   open-ssl:
     build: 
       dockerfile: Dockerfile
+      target: openssl
       context: .
     network_mode: host
     # debug
@@ -35,16 +37,10 @@ services:
     volumes:
       - type: bind
         source: ./client-configs
-        target: /etc/openvpn/server/client-configs
+        target: /root/openvpn/client-configs
       - type: bind
         source: ./openssl
-        target: /etc/openvpn/openssl
+        target: /root/openvpn/openssl
       - type: bind
         source: ./scripts
-        target: /etc/openvpn/scripts
-      - type: bind
-        source: ./server/
-        target: /etc/openvpn/server/
-      - type: bind
-        source: /dev/net/tun
-        target: /dev/net/tun
+        target: /root/openvpn/scripts

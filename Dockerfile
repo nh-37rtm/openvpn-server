@@ -7,8 +7,17 @@ ENV VIRTUAL_ENV=/opt/python/venv \
 
 USER root:root
 
-# python execution environment
 RUN apt-get update
+
+FROM base as openssl
+
+RUN apt-get install -y --no-install-recommends \
+    openssl iproute2 jq netcat-openbsd
+
+WORKDIR /root
+
+FROM base as openvpn
+
 RUN apt-get install -y --no-install-recommends \
     openvpn
 
