@@ -9,6 +9,9 @@ USER root:root
 
 RUN apt-get update
 
+RUN apt-get install -y --no-install-recommends \
+    openvpn
+
 FROM base as openssl
 
 RUN apt-get install -y --no-install-recommends \
@@ -17,9 +20,6 @@ RUN apt-get install -y --no-install-recommends \
 WORKDIR /root
 
 FROM base as openvpn
-
-RUN apt-get install -y --no-install-recommends \
-    openvpn
 
 RUN mkdir -p \
     /etc/openvpn/server/client-configs /var/openvpn/
