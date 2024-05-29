@@ -19,7 +19,7 @@ prerequisites >/dev/null
 
 {
 
-    FIRST_IPV6=$(ip --json address | jq '.[] | select(.ifname | test("enp0s")) | .addr_info[1] | select( .family == "inet6" ) | .local')
+    FIRST_IPV6=$(ip --json address | jq '.[] | select(.ifname | test("ens")) | .addr_info[1] | select( .family == "inet6" ) | .local')
     cat <<EOF
 client
 
