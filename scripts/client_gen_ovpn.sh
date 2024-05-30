@@ -27,7 +27,7 @@ client
 # uses SSL, it's very hard to distinguish this traffic from "real" HTTPS
 # traffic.
 #
-remote $FIRST_IPV6 1294 udp6
+remote $FIRST_IPV6 1194 udp6
 
 # If the server doesn't answer after 5 seconds, try the next server.
 server-poll-timeout 5

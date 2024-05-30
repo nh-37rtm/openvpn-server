@@ -26,8 +26,10 @@ example for the ``portable`` client :
 ````shell
 client-configs# cat ./portable
 ifconfig-push 10.0.0.25 255.255.255.0
+ifconfig-ipv6-push fd1d:cc55:893:1b4c::1000/24
 # allow route to the network 10.1.1.0 to pass through ``portable``
 iroute 10.1.1.0 255.255.255.0
 ````
+
 
 
