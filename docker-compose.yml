@@ -12,7 +12,7 @@ services:
     volumes:
       - type: bind
         source: ./client-configs
-        target: /etc/openvpn/server/client-configs
+        target: /etc/openvpn/client-configs
       - type: bind
         source: ./openssl
         target: /etc/openvpn/openssl

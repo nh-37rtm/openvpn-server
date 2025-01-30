@@ -6,6 +6,7 @@
 bash ./scripts/build_server.sh
 
 ## generate a new server certificate (overwrite old certificate !)
+## do not forget to change the CN field in openssl.conf
 bash ./scripts/build_client.sh
 
 ## generate a ovpn client file
