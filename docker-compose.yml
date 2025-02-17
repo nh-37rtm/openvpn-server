@@ -1,0 +1,45 @@
+version: '3.6'
+
+services:
+  openvpn-server:
+    build: 
+      dockerfile: Dockerfile
+      target: openvpn
+      context: .
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - type: bind
+        source: ./client-configs
+        target: /etc/openvpn/client-configs
+      - type: bind
+        source: ./openssl
+        target: /etc/openvpn/openssl
+      - type: bind
+        source: ./server/
+        target: /etc/openvpn/server/
+      - type: bind
+        source: /dev/net/tun
+        target: /dev/net/tun
+  openssl:
+    build: 
+      dockerfile: Dockerfile
+      target: openssl
+      context: .
+    network_mode: host
+    entrypoint: /bin/bash
+    command: [ 
+        "-c", 
+        "while true; echo keeping container up ...; do /bin/sleep 10; done" 
+    ]
+    volumes:
+      - type: bind
+        source: ./client-configs
+        target: /root/openvpn/client-configs
+      - type: bind
+        source: ./openssl
+        target: /root/openvpn/openssl
+      - type: bind
+        source: ./scripts
+        target: /root/openvpn/scripts

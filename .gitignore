@@ -1,0 +1,11 @@
+
+# openssl private data
+**/*.csr
+**/*.key
+**/*.crt
+**/*.pem
+**/*.srl
+
+easyrsa/pki/
+**.ovpn
+client-configs
