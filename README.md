@@ -5,7 +5,7 @@
 ## generate a new server certificate 
 bash ./scripts/build_server.sh
 
-## generate a new server certificate (overwrite old certificate !)
+## generate a new client certificate (overwrite old certificate !)
 ## do not forget to change the CN field in openssl.conf
 bash ./scripts/build_client.sh
 
