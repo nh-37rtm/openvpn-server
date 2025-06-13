@@ -27,7 +27,7 @@ prerequisites >/dev/null
         # generating ca key ...
         openssl genpkey -algorithm RSA -out ca-key.pem -config conf/openssl.conf
         # generating new ca certificate with key ...
-        openssl req -new -x509 -key ca-key.pem -out ca-cert.pem -days 365 -config conf/openssl.conf \
+        openssl req -new -x509 -key ca-key.pem -out ca-cert.pem -days 3650 -config conf/openssl.conf \
             -text \
             # -extfile conf/x509_extensions.conf -extensions v3_req_ca
     fi
