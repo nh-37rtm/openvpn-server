@@ -27,7 +27,10 @@ client
 # uses SSL, it's very hard to distinguish this traffic from "real" HTTPS
 # traffic.
 #
-remote $FIRST_IPV6 1194 udp6
+remote vpn.37rtm.fr 1194 udp6
+remote vpn.37rtm.fr 1195 tcp6
+remote vpn.37rtm.fr 1194 udp
+remote vpn.37rtm.fr 1195 tcp
 
 # If the server doesn't answer after 5 seconds, try the next server.
 server-poll-timeout 5

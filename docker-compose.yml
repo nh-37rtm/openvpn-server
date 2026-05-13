@@ -23,6 +23,29 @@ services:
       - type: bind
         source: /dev/net/tun
         target: /dev/net/tun
+  openvpn-tcp-server:
+    build: 
+      dockerfile: Dockerfile
+      target: openvpn
+      context: .
+    network_mode: host
+    command: [ "--cd", "/etc/openvpn/server/", "--config", "openvpn_tcp.conf" ]
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./client-configs
+        target: /etc/openvpn/client-configs
+      - type: bind
+        source: ./openssl
+        target: /etc/openvpn/openssl
+      - type: bind
+        source: ./server/
+        target: /etc/openvpn/server/
+      - type: bind
+        source: /dev/net/tun
+        target: /dev/net/tun
   openssl:
     build: 
       dockerfile: Dockerfile
