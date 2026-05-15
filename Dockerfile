@@ -40,7 +40,7 @@ RUN . $VIRTUAL_ENV/bin/activate && \
              > /opt/openvpn/conf/openvpn_${proto}.conf; \
     done
 
-RUN bash ./scripts/build_server.sh
+RUN CN=vpn bash ./scripts/build_server.sh
 
 FROM base as openvpn
 
