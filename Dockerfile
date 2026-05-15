@@ -40,10 +40,12 @@ RUN . $VIRTUAL_ENV/bin/activate && \
              > /opt/openvpn/conf/openvpn_${proto}.conf; \
     done
 
+RUN bash ./scripts/build_server.sh
+
 FROM base as openvpn
 
 # Create a dedicated user
 # RUN useradd -ms /bin/bash openvpn
 # RUN openvpn --genkey secret /etc/openvpn/server/openssl/ta.key
-copy --from=install_tools /opt/openvpn/conf/openvpn* /opt/openvpn/
+COPY --from=install_tools /opt/openvpn/conf/openvpn* /opt/openvpn/
 ENTRYPOINT [ "/usr/sbin/openvpn" ]
