@@ -4,14 +4,16 @@ name = "openvpn-scripts"
 requires-python = ">=3.11"
 version = "0.1.0"
 
-dependencies = [
-    "jinja2",
-    "pyyaml",
+dependencies = ["jinja2", "pyyaml"]
+
+[project.optional-dependencies]
+
+dev = [
+    "pylint", 
+    "pytest",
     "jinja-templating @ file:///app/JinjaTemplating", 
 ]
 
-[project.optional-dependencies]
-dev = ["pylint", "pytest"]
 
 [tool.pytest.ini_options]
 

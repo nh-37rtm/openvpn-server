@@ -2,7 +2,7 @@
 
 set -euxab
 
-
+OPENSSL_DIR=$(dirname -- "$0")/../conf/openssl
 
 
 prerequisites()
@@ -11,16 +11,17 @@ prerequisites()
 
     for pr in conf/openssl.conf conf/x509_extensions.conf
     do
-        test -e  "$pr"
+        test -e ${OPENSSL_DIR}/${pr}
     done
+
+    echo "CN (required to be the server name) is : $CN"
     
 }
 
-cd $(dirname -- "$0")/../openssl
 prerequisites >/dev/null
 
+generate_certs()
 {
-    
     if ! [[ -f ca-key.pem ]]
     then
 
@@ -55,3 +56,7 @@ prerequisites >/dev/null
         openvpn --genkey secret ta.key
     fi
 }
+
+
+cd ${OPENSSL_DIR}
+generate_certs

@@ -2,21 +2,25 @@
 
 set -euxab
 
+CONF_DIR=$(dirname -- "$0")/../conf
+OPENSSL_DIR=${CONF_DIR}/openssl
+
+
 prerequisites()
 {
     type openssl test
+    echo "CN (required to be the server name) is : $CN"
+}
+
+prerequisites >/dev/null
+
+function generate_certs()
+{ 
 
     for pr in conf/openssl.conf conf/x509_extensions.conf ca-cert.pem ca-key.pem
     do
-        test -e  "$pr"
+        test -e ${pr}
     done
-
-}
-
-cd $(dirname -- "$0")/../openssl
-prerequisites >/dev/null
-
-{ 
 
     # generating  client key
     openssl genpkey -algorithm RSA -out client-key.pem -config conf/openssl.conf
@@ -32,6 +36,26 @@ prerequisites >/dev/null
 }
 
 
+function generate_ovpn()
+{
 
+    for pr in ca-cert.pem client-cert.pem client-key.pem ta.key
+    do
+        test -e ${OPENSSL_DIR}/${pr}
+    done
+    
 
+    FIRST_IPV6=$(ip --json address | jq '.[] | select(.ifname | test("ens|eth")) | .addr_info[1] | select( .family == "inet6" ) | .local')
 
+    CA_CERT_PEM=$(cat ${OPENSSL_DIR}/ca-cert.pem) \
+    CA_CLIENT_CERT_PEM=$(cat ${OPENSSL_DIR}/client-cert.pem) \
+    CA_CLIENT_KEY_PEM=$(cat ${OPENSSL_DIR}/client-key.pem) \
+    CA_TA_KEY_PEM=$(cat ${OPENSSL_DIR}/ta.key) \
+        jte --template ./conf/templates/openvpn_client.conf.j2 > ${CONF_DIR}/client-configs/${CN}.ovpn
+}
+
+(
+    cd ${OPENSSL_DIR}
+    generate_certs
+)
+generate_ovpn
