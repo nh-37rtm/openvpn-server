@@ -10,3 +10,4 @@ easyrsa/pki/
 **.ovpn
 client-configs
 **/*.egg-info
+*.tar

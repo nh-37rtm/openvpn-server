@@ -7,6 +7,7 @@ services:
       target: openvpn
       context: .
     network_mode: host
+    command: [ "--cd", "/opt/openvpn", "--config", "/opt/openvpn/openvpn_udp.conf" ]
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -23,7 +24,7 @@ services:
       target: openvpn
       context: .
     network_mode: host
-    command: [ "--cd", "/etc/openvpn/server/", "--config", "openvpn_tcp.conf" ]
+    command: [ "--cd", "/opt/openvpn", "--config", "/opt/openvpn/openvpn_tcp.conf" ]
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -37,7 +38,7 @@ services:
   openssl:
     build: 
       dockerfile: Dockerfile
-      target: openssl
+      target: install_tools
       context: .
     network_mode: host
     entrypoint: /bin/bash

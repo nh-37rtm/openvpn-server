@@ -11,9 +11,12 @@ dependencies = ["jinja2", "pyyaml"]
 dev = [
     "pylint", 
     "pytest",
-    "jinja-templating @ file:///app/JinjaTemplating", 
+    "jinja-templating @ file:///app/JinjaTemplating",
 ]
 
+run = [
+    "jinja-templating @ git+https://github.com/nh-37rtm/JinjaTemplating.git@master",
+]
 
 [tool.pytest.ini_options]
 
