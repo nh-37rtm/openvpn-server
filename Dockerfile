@@ -32,16 +32,6 @@ RUN python3 -m venv $VIRTUAL_ENV && \
     pip install /opt/openvpn/scripts[run] && \
     echo .
 
-ADD conf.tar /opt/openvpn/
-
-RUN . $VIRTUAL_ENV/bin/activate && \
-    for proto in tcp udp; do \
-         SERVER_PROTO=$proto jte -t ./conf/templates/openvpn_server.conf.j2 \
-             > /opt/openvpn/conf/openvpn_${proto}.conf; \
-    done
-
-RUN CN=vpn bash ./scripts/build_server.sh
-
 FROM base as openvpn
 
 # Create a dedicated user

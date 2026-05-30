@@ -33,15 +33,18 @@ generate_certs()
             # -extfile conf/x509_extensions.conf -extensions v3_req_ca
     fi
 
-    # creating a new certificate request for server with key ...
-    openssl req -new -nodes -keyout server-key.pem -out server-cert.pem -config conf/openssl.conf
+    if ! [[ -e server-cert.pem ]]
+    then
+        # creating a new certificate request for server with key ...
+        openssl req -new -nodes -keyout server-key.pem -out server-cert.pem -config conf/openssl.conf
 
-    # signing certificate request ...
-    # openssl x509 -req -days 365 -in server.csr -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -out server.crt
-    openssl x509 -req -sha256 -in server-cert.pem \
-        -CA ca-cert.pem -CAkey ca-key.pem\
-        -out server-cert.pem -days 730 -CAcreateserial \
-        -text -extfile conf/x509_extensions.conf -extensions v3_req_server
+        # signing certificate request ...
+        # openssl x509 -req -days 365 -in server.csr -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -out server.crt
+        openssl x509 -req -sha256 -in server-cert.pem \
+            -CA ca-cert.pem -CAkey ca-key.pem\
+            -out server-cert.pem -days 730 -CAcreateserial \
+            -text -extfile conf/x509_extensions.conf -extensions v3_req_server
+    fi
 
     if ! [[ -f dh.pem ]]
     then
