@@ -20,7 +20,7 @@ docker-compose exec openssl bash /opt/openvpn/scripts/generate_configuration.sh
 
 docker-compose exec -it openssl CN=vpn bash ./scripts/build_server.sh
 docker-compose exec -it openssl tar cf - /opt/openvpn/conf/ | docker-compose exec -it tar -C /opt/openvpn/ xf -
-
+docker-compose stop openssl
 docker-compose up --build openvpn-server openvpn-tcp-server
 
 
